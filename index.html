@@ -1,1 +1,91 @@
-Thiru Nandhini
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Laravel Form</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+	<div class="container">
+		<div class="row"><br><br>
+			<div class="well">
+				<div class='input-form'>
+					@if( isset($form) )
+					    {{ Form::model($form, ['route' => ['form.update', $form->id], 'method' => 'patch', 'class' => 'form-horizontal']) }}
+					@else
+						{!! Form::open(['url' => '/form' , 'method' => 'post', 'class' => 'form-horizontal']) !!}
+					    
+					@endif
+					<fieldset>
+						<legend>Student Form</legend>
+						<div class="form-group">
+							{!! Form::label('student_name' , 'Student Name :' , ['class' => 'col-lg-2 control-label']) !!}
+							<div class="col-md-8">
+								{!! Form::text('student_name', $value=null, ['class' => 'form-control' , 'placeholder' => 'Enter the Student Name']) !!}
+							</div>
+						</div>
+
+						<div class="form-group">
+							{!! Form::label('email', 'Email :', ['class' => 'col-lg-2 control-label']) !!}
+							<div class="col-md-8">
+								{!! Form::email('email' , $value=null, ['class' => 'form-control', 'placeholder' => 'Enter the Email']) !!}
+							</div>
+						</div>
+
+						<div class="form-group">
+							{!! Form::label('mobile_number', 'Mobile Number :', ['class' => 'col-lg-2 control-label']) !!}
+							<div class="col-md-8">
+								{!! Form::number('mobile_number', $value = null, ['class' => 'form-control', 'placeholder' => 'Enter Your Mobile Number']) !!}
+							</div>
+						</div>
+
+						<div class="form-group">
+							{!! Form::label('department', 'Department', ['class' => 'col-lg-2 control-label']) !!}
+							<div class="col-md-8">
+								{!! Form::select('department',['CSE' => 'Computer Science and Engineering','ECE' => 'Electronics and Communication Engineering', 'AE' => 'Aeronautical Engineering', 'MECH' => 'Mechanical Engineeing'],'S', ['class' => 'form-control']) !!}
+							</div>
+						</div>
+
+						<div class="form-group">
+							{!! Form::label('category' , 'Category :' , ['class' => 'col-lg-2 control-label']) !!}
+							<div class="col-md-8">
+								<div class="radio">
+									{!! Form::label('hostler','Hostler') !!}
+									{!! Form::radio('category','Hostler','true',['id' => 'hostler']) !!}
+								</div>
+								<div class="radio">
+									{!! Form::label('dayscholar','Day Scholar') !!}
+									{!! Form::radio('category','Day Scholar','true',['id' => 'dayscholar']) !!}
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							{!! Form::label('message','Message :', ['class' => 'col-lg-2 control-label']) !!}
+							<div class="col-md-8">
+								{!! Form::textarea('message',$value = null, ['class' => 'form-control', 'rows' => 3]) !!}
+							</div>
+						</div>
+						<div class="form-group">
+					        <div class="col-md-4 col-lg-offset-2">
+					            {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-info pull-right'] ) !!} 
+					        </div>
+					    </div>
+					</fieldset>
+							
+						@if(count($errors)>0)
+							<div class="alert alert-danger"> 
+								@foreach($errors->all() as $error)
+									{{$error}}
+								@endforeach
+							</div>
+						@endif
+				</div>
+			</div>
+		</div>
+	</div>
+    {!! Form::close()  !!}
+</body>
+</html>
